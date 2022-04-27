@@ -9,7 +9,7 @@ const getAllUsers = async (req, res) => {
 };
 
 const createUser = async (reque, res) => {
-  const { name, email } = req.body;
+  const { name, email, password, role } = req.body;
 
   const newUser = await User.create({ newUser });
 

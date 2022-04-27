@@ -2,6 +2,7 @@ const express = require("express");
 
 // Routers
 const { usersRouter } = require("./routes/users.routes");
+//const { postsRouter } = require("./routes/posts.routes");
 
 // Utils
 const { db } = require("./utils/database");
@@ -15,6 +16,7 @@ app.use(express.json());
 // Endpoints
 // http://localhost:4000/api/v1/users
 app.use("/api/v1/users", usersRouter);
+//app.use("/api/v1/posts", postsRouter);
 
 db.authenticate()
   .then(() => console.log("Database authenticated"))
