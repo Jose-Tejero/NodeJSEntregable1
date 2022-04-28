@@ -1,19 +1,84 @@
 const { User } = require("../models/user.model");
 
 const getAllUsers = async (req, res) => {
-  const users = await User.findAll();
+  try {
+    const users = await User.findAll();
 
-  res.status(200).json({
-    users,
-  });
+    res.status(200).json({
+      users,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const createUser = async (reque, res) => {
-  const { name, email, password, role } = req.body;
+  try {
+    const { name, email, password, role } = req.body;
 
-  const newUser = await User.create({ newUser });
+    const newUser = await User.create({ newUser });
 
-  res.status(201).json({ newUser });
+    res.status(201).json({ newUser });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-module.exports = { getAllUsers, createUser };
+const getUserById = async (req, res) => {
+  try {
+    const { user } = req;
+    // const { id } = req.params;
+
+    // SELECT * FROM users WHERE id = ?
+    // const user = await User.findOne({ where: { id } });
+
+    res.status(200).json({
+      user,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const updateUser = async (req, res) => {
+  try {
+    const { user } = req;
+    // const { id } = req.params;
+    const { name } = req.body;
+
+    // await User.update({ name }, { where: { id } });
+
+    // const user = await User.findOne({ where: { id } });
+
+    await user.update({ name });
+
+    res.status(200).json({ status: "success" });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const deleteUser = async (req, res) => {
+  try {
+    const { user } = req;
+    // const { id } = req.params;
+
+    // DELETE FROM ...
+    // await user.destroy();
+    await user.update({ status: "deleted" });
+
+    res.status(200).json({
+      status: "success",
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = {
+  getAllUsers,
+  createUser,
+  getUserById,
+  updateUser,
+  deleteUser,
+};
