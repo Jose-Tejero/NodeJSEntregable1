@@ -1,20 +1,22 @@
 const express = require("express");
-
-// Routers
+const cors = require("cors");
 const { usersRouter } = require("./routes/users.routes");
 const { repairsRouter } = require("./routes/repairs.routers");
 
-// Utils
 const { db } = require("./utils/database");
 
-// Init express app
 const app = express();
 
-// Enable incoming JSON data
+const corsOptions = {
+  origin: "*",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+};
+app.use(cors(corsOptions));
+
 app.use(express.json());
 
-// Endpoints
-// http://localhost:4000/api/v1/users
 app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/repair", repairsRouter);
 
@@ -26,7 +28,6 @@ db.sync()
   .then(() => console.log("Database synced"))
   .catch((err) => console.log(err));
 
-// Spin up server
 const PORT = 4000;
 app.listen(PORT, () => {
   console.log(`Express app running on port: ${PORT}`);

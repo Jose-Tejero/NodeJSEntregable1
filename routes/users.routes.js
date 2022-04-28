@@ -1,9 +1,7 @@
-const express = require('express');
+const express = require("express");
 
-// Middlewares
-const { userExists } = require('../middlewares/users.middlewares');
+const { userExists } = require("../middlewares/users.middlewares");
 
-// Controller
 const {
   getAllUsers,
   createUser,
@@ -11,22 +9,16 @@ const {
   updateUser,
   deleteUser,
   getActivesUsers,
-} = require('../controllers/users.controller');
+} = require("../controllers/users.controller");
 
 const router = express.Router();
 
-router.get('/', getAllUsers);
-router.get('/actives', getActivesUsers);
-router.post('/', createUser);
-
-// router.get('/:id', userExists, getUserById);
-
-// router.patch('/:id', updateUser);
-
-// router.delete('/:id', deleteUser);
+router.get("/", getAllUsers);
+router.get("/actives", getActivesUsers);
+router.post("/", createUser);
 
 router
-  .route('/:id')
+  .route("/:id")
   .get(userExists, getUserById)
   .patch(userExists, updateUser)
   .delete(userExists, deleteUser);

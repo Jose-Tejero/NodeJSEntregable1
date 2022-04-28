@@ -1,9 +1,7 @@
 const express = require('express');
 
-// Middlewares
 const { repairExists } = require('../middlewares/repairs.middlewares');
 
-// Controller
 const {
   getAllRepairs,
   createRepair,

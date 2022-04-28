@@ -1,5 +1,5 @@
 // Models
-const { User } = require('../models/user.model');
+const { User } = require("../models/user.model");
 
 const userExists = async (req, res, next) => {
   try {
@@ -9,12 +9,11 @@ const userExists = async (req, res, next) => {
 
     if (!user) {
       return res.status(404).json({
-        status: 'error',
-        message: 'User not found given that id',
+        status: "error",
+        message: "User not found given that id",
       });
     }
 
-    // Add user data to the req object
     req.user = user;
     next();
   } catch (error) {

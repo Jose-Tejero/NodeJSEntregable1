@@ -16,7 +16,7 @@ const getActivesUsers = async (req, res) => {
   try {
     const { count, rows } = await User.findAndCountAll({
       where: {
-        status: "ative",
+        status: "active",
       },
     });
 
@@ -32,9 +32,6 @@ const createUser = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
 
-    /* const newUser = {
-
-    } */
     const newUser = await User.create({ name, email, password, role });
 
     res.status(201).json({ newUser });
@@ -46,10 +43,6 @@ const createUser = async (req, res) => {
 const getUserById = async (req, res) => {
   try {
     const { user } = req;
-    // const { id } = req.params;
-    // const result = await User.findByPk(user);
-    // SELECT * FROM users WHERE id = ?
-    // const user = await User.findOne({ where: { id } });
 
     res.status(200).json({
       user,
@@ -62,14 +55,9 @@ const getUserById = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const { user } = req;
-    // const { id } = req.params;
-    const { name, email } = req.body;
+    const { name, email, status } = req.body;
 
-    // await User.update({ name }, { where: { id } });
-
-    // const user = await User.findOne({ where: { id } });
-
-    await user.update({ name, email });
+    await user.update({ name, email, status });
 
     res.status(200).json({ status: "success" });
   } catch (error) {
@@ -80,10 +68,7 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const { user } = req;
-    // const { id } = req.params;
 
-    // DELETE FROM ...
-    // await user.destroy();
     await user.update({ status: "deleted" });
 
     res.status(200).json({
