@@ -10,12 +10,13 @@ const {
   getUserById,
   updateUser,
   deleteUser,
+  getActivesUsers,
 } = require('../controllers/users.controller');
 
 const router = express.Router();
 
 router.get('/', getAllUsers);
-
+router.get('/actives', getActivesUsers);
 router.post('/', createUser);
 
 // router.get('/:id', userExists, getUserById);

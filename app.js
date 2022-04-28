@@ -16,7 +16,7 @@ app.use(express.json());
 // Endpoints
 // http://localhost:4000/api/v1/users
 app.use("/api/v1/users", usersRouter);
-app.use("/api/v1/posts", repairsRouter);
+app.use("/api/v1/repair", repairsRouter);
 
 db.authenticate()
   .then(() => console.log("Database authenticated"))

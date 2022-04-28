@@ -12,11 +12,30 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-const createUser = async (reque, res) => {
+const getActivesUsers = async (req, res) => {
+  try {
+    const { count, rows } = await User.findAndCountAll({
+      where: {
+        status: "ative",
+      },
+    });
+
+    res.status(200).json({
+      rows,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const createUser = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
 
-    const newUser = await User.create({ newUser });
+    /* const newUser = {
+
+    } */
+    const newUser = await User.create({ name, email, password, role });
 
     res.status(201).json({ newUser });
   } catch (error) {
@@ -28,7 +47,7 @@ const getUserById = async (req, res) => {
   try {
     const { user } = req;
     // const { id } = req.params;
-
+    // const result = await User.findByPk(user);
     // SELECT * FROM users WHERE id = ?
     // const user = await User.findOne({ where: { id } });
 
@@ -44,13 +63,13 @@ const updateUser = async (req, res) => {
   try {
     const { user } = req;
     // const { id } = req.params;
-    const { name } = req.body;
+    const { name, email } = req.body;
 
     // await User.update({ name }, { where: { id } });
 
     // const user = await User.findOne({ where: { id } });
 
-    await user.update({ name });
+    await user.update({ name, email });
 
     res.status(200).json({ status: "success" });
   } catch (error) {
@@ -81,4 +100,5 @@ module.exports = {
   getUserById,
   updateUser,
   deleteUser,
+  getActivesUsers,
 };
